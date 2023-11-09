@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Container, Form, ContainerNav } from "./style";
 import { loginUser } from "../../Services/UserService";
 import logo from "../../assets/logo.svg";
@@ -25,14 +27,20 @@ const Login = () => {
       const response = await loginUser(form);
 
       if (response === true) {
-        alert("Usuário Logado!");
+        toast.success("Usuário logado com sucesso!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         navigate("/");
       } else {
-        alert("Usuário ou senha incorretos!");
+        toast.error("Usuário ou senha incorretos!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     } catch (error) {
       console.error("Erro ao enviar formulário!", error);
-      alert("Erro ao enviar formulário!");
+      toast.error("Erro ao tentar se logar!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } finally {
       setLoading(false);
     }
@@ -44,7 +52,6 @@ const Login = () => {
   };
 
   const validateInput = () => {
-    // You can add your validation logic here, e.g., use a library like Yup for form validation.
     return form.email && form.password;
   };
 
@@ -80,6 +87,7 @@ const Login = () => {
           disabled={loading || !validateInput()}
         />
       </Form>
+      <ToastContainer />
     </Container>
   );
 };

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { DragAndDropContainer, Line } from "./style";
 
 import { updateLeadStatus } from "../../Services/LeadsService";
 import Modal from "../Modal";
-import { ToastContainer, toast } from "react-toastify";
 
 const DragAndDrop = ({ lead }) => {
   const [slots, setSlots] = useState([]);

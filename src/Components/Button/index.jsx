@@ -2,9 +2,12 @@ import React from "react";
 import { StyledButton } from "./styles";
 const Button = ({ type, text, onClick, disabled, color, secondary }) => {
   return (
-    <StyledButton type={type} onClick={onClick} color={color}
+    <StyledButton
+      type={type}
+      onClick={onClick}
+      color={color}
       secondary={secondary ? 1 : 0}
-    disabled={disabled}
+      disabled={disabled}
     >
       {text}
     </StyledButton>

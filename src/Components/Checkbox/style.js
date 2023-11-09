@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display: flex;
-    gap: 10px;
-    color: #0C0D0E; 
-    /* padding: 2px 0px; */
-    font-size: 16px;
-    `;
+  display: flex;
+  gap: 10px;
+  color: #0c0d0e;
+  font-size: 16px;
+`;

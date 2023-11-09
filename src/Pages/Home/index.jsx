@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Container } from "./style";
 import logo from "../../assets/logo.svg";
@@ -7,7 +8,7 @@ import { logoutUser } from "../../Services/UserService";
 import Modal from "../../Components/Modal";
 import Button from "../../Components/Button";
 import Table from "../../Components/Table";
-import "react-toastify/dist/ReactToastify.css";
+
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -40,7 +41,6 @@ const Home = () => {
         color="#2996ba"
         text="+ Novo Lead"
       />
-      <div>{/* Adicione o botão de logout aqui */}</div>
       {showModal && (
         <Modal
           onClose={toggleModal}

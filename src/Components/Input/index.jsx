@@ -3,7 +3,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 import { StyledLabel, Container, ContainerInput } from "./styles";
 
-const Input = ({ label, name, onChange, type, required, value, disabled}) => {
+const Input = ({ label, name, onChange, type, required, value, disabled }) => {
   const isPassword = type === "password";
   const [showPassword, setShowPassword] = useState(false);
 
@@ -11,8 +11,9 @@ const Input = ({ label, name, onChange, type, required, value, disabled}) => {
 
   return (
     <Container>
-      <StyledLabel htmlFor={name}>{label}
-      {required && <span>*</span>}
+      <StyledLabel htmlFor={name}>
+        {label}
+        {required && <span>*</span>}
       </StyledLabel>
       <ContainerInput>
         <input

@@ -21,19 +21,20 @@ export const ContainerInput = styled.div`
       background-color: #fff;
     }
   }
+
   svg {
     cursor: pointer;
     color: #808080;
     font-size: 20px;
     margin-left: 10px;
-  }
-`;
+  }`;
+  
 export const StyledLabel = styled.label`
- 
   font-size: 15px;
   font-weight: 500;
   text-align: left;
   width: 100%;
+  
   span{
     color: red;
   }
@@ -43,6 +44,5 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
   gap: 10px 0px;
 `;

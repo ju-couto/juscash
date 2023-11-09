@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ModalStyled, OpacityContainer, ContainerButton, Form } from "./style";
 import { AiOutlineClose } from "react-icons/ai";
 import { createLead } from "../../Services/LeadsService";
@@ -9,6 +11,7 @@ import {
   validateName,
   validateEmail,
   validatePhone,
+  formatPhone,
 } from "../../Utils/validators";
 
 const Modal = ({ onClose, type, leadData, onLeadCreated }) => {
@@ -36,7 +39,7 @@ const Modal = ({ onClose, type, leadData, onLeadCreated }) => {
     } else {
       const updatedForm = {
         ...form,
-        [name]: value,
+        [name]: name === "phone" ? formatPhone(value) : value,
       };
       const allSelected =
         updatedForm.successFees &&
@@ -65,10 +68,13 @@ const Modal = ({ onClose, type, leadData, onLeadCreated }) => {
         onClose();
         onLeadCreated(true);
       } else {
-        onLeadCreated(false)
+        onLeadCreated(false);
       }
     } catch (error) {
-       alert("Erro ao enviar formulário!", error);
+      toast.error("Erro ao enviar formulário!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
       console.log(error);
     }
   };
@@ -89,25 +95,28 @@ const Modal = ({ onClose, type, leadData, onLeadCreated }) => {
         <h2>Dados do Lead</h2>
         <Form>
           <Input
-            label="Nome Completo"
+            label="Nome Completo "
             name="name"
             type="text"
+            required
             disabled={type === "view"}
             value={leadData ? leadData.name : form.name}
             onChange={(e) => handleChange("name", e.target.value)}
           />
           <Input
-            label="E-mail"
+            label="E-mail "
             name="email"
             type="email"
+            required
             disabled={type === "view"}
             value={leadData ? leadData.email : form.email}
             onChange={(e) => handleChange("email", e.target.value)}
           />
           <Input
-            label="Telefone"
+            label="Telefone "
             name="phone"
-            type="text"
+            required
+            type="tel"
             disabled={type === "view"}
             value={leadData ? leadData.phone : form.phone}
             onChange={(e) => handleChange("phone", e.target.value)}

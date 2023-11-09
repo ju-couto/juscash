@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const TableStyled = styled.div`
   display: flex;
   font-size: 14px;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -17,7 +16,6 @@ export const TableHead = styled.div`
   flex-direction: row;
   color: #899090;
   font-weight: 600;
-  /* margin-bottom: 3px; */
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -40,13 +38,10 @@ export const TableBody = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-
- 
- 
   & > div:nth-child(even) {
-    background-color: #eff1f0; /* Cor de fundo para linhas pares */
+    background-color: #eff1f0; 
   }
   & > div:nth-child(odd) {
-    background-color: #fff; /* Cor de fundo para linhas ímpares (pode ser igual à cor de fundo da tabela) */
+    background-color: #fff; 
   }
 `;
