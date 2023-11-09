@@ -1,4 +1,5 @@
 # Teste JusCash - FullStack
+Deploy do projeto: https://juscash-one.vercel.app/
 
 ## Para o desenvolvimento desse projeto foi utilizado as seguintes tecnologias:
 
@@ -6,6 +7,7 @@
 - styled-components
 - react-router-dom
 - react-icons
+- react-toastify
 
 ## Como rodar o projeto:
 
