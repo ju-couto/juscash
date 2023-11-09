@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DragAndDropContainer, Line } from "./style";
-import ViewModal from "../ViewModal";
-
-import { AiOutlineMenu } from "react-icons/ai";
 
 import { updateLeadStatus } from "../../Services/LeadsService";
 import Modal from "../Modal";
+import { ToastContainer, toast } from "react-toastify";
 
 const DragAndDrop = ({ lead }) => {
   const [slots, setSlots] = useState([]);
@@ -20,7 +18,7 @@ const DragAndDrop = ({ lead }) => {
 
   const handleLeadSelect = (lead) => {
     setSelectedLead(lead);
-    openModal();
+    setIsModalOpen(true);
   };
 
   const SlotStatus = {
@@ -49,19 +47,26 @@ const DragAndDrop = ({ lead }) => {
       }
     }
 
+    if (index === 2 && updatedItems.indexOf(draggedItem) === 0) {
+      return;
+    }
+
     if (index > updatedItems.indexOf(draggedItem) && draggedItem !== "") {
-      updatedItems.splice(index, 0, updatedItems.splice(updatedItems.indexOf(draggedItem), 1)[0]);
+      updatedItems.splice(
+        index,
+        0,
+        updatedItems.splice(updatedItems.indexOf(draggedItem), 1)[0]
+      );
       setSlots(updatedItems);
 
       if (index === 1) {
-        // console.log(lead);
         updateLeadStatus(lead, SlotStatus.DADOS_CONFIRMADOS);
-        
       } else if (index === 2) {
         updateLeadStatus(lead, SlotStatus.ANALISE_DO_LEAD);
-        
       } else {
-        alert("Não é possível mover o item para esta posição");
+        toast.error("Não é possível mover para essa posição", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };
@@ -93,44 +98,44 @@ const DragAndDrop = ({ lead }) => {
 
     setSlots(initialSlots);
   };
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
   return (
     <Line style={{ color: "black", display: "flex" }}>
-      <main onDrop={(e) => e.preventDefault()} onDragOver={(e) => e.preventDefault()}>
-        <DragAndDropContainer >
+      <main
+        onDrop={(e) => e.preventDefault()}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <DragAndDropContainer>
           {slots.map((item, idx) => {
-              
             return (
               <li
-              key={idx}
-              onDragOver={() => onDragOver(idx)}
-              onDrop={() => onDragOver(idx)}
-              onClick={() => handleLeadSelect(lead)}
-              style={listItemStyle}
-            >
-              <div
-                className="drag"
-                draggable
-                onDragStart={(e) => onDragStart(e, idx)}
-                onDragEnd={onDragEnd}
+                key={idx}
+                onDragOver={() => onDragOver(idx)}
+                onDrop={() => onDragOver(idx)}
+                onClick={() => handleLeadSelect(lead)}
+                style={listItemStyle}
               >
-            
-              {item !== "" ? item : ""}
-              </div>
-
-            </li>
-            )
-          }
-          )}
-           
+                <div
+                  className="drag"
+                  draggable
+                  onDragStart={(e) => onDragStart(e, idx)}
+                  onDragEnd={onDragEnd}
+                >
+                  {item !== "" ? item : ""}
+                </div>
+              </li>
+            );
+          })}
         </DragAndDropContainer>
-            
-        </main>
-        {selectedLead && <Modal type="view" leadData={selectedLead} onClose={() => setSelectedLead(null)} />}
-       
+      </main>
+      {selectedLead && (
+        <Modal
+          type="view"
+          leadData={selectedLead}
+          onClose={() => setSelectedLead(null)}
+        />
+      )}
+      <ToastContainer />
     </Line>
   );
 };

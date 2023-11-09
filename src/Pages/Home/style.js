@@ -5,7 +5,6 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    height: 100vh;
     min-width: 100vw;
     gap: 20px;
     background-color: #fff;

@@ -36,28 +36,12 @@ export const HeadData = styled.div`
 export const TableBody = styled.div`
   display: flex;
   flex-direction: column;
-  /* background-color: #fff; */
   color: #000;
   align-items: center;
   justify-content: center;
   width: 100%;
 
-  /* gap: 5px; */
-  main {
-    width: 100%;
-    border-top: 1px solid #d8dada; /* Borda superior */
-    border-bottom: 1px solid #d8dada; /* Borda inferior */
-    ul {
-      height: 100%
-    }
-    li{
-      width: 33%;
-      div{
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+ 
  
   & > div:nth-child(even) {
     background-color: #eff1f0; /* Cor de fundo para linhas pares */

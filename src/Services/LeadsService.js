@@ -29,7 +29,6 @@ const updateLeadStatus = (givenLead, status)  => {
   lead.status = status;
   localStorage.setItem('leads', JSON.stringify(leads));
   return true;
-  // console.log(leads);
 }
 
 export { createLead, getLeads, updateLeadStatus, updateLeads };

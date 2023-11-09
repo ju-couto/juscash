@@ -11,7 +11,7 @@ import {
   validatePhone,
 } from "../../Utils/validators";
 
-const Modal = ({ onClose, type, leadData }) => {
+const Modal = ({ onClose, type, leadData, onLeadCreated }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,6 +22,7 @@ const Modal = ({ onClose, type, leadData }) => {
     dativesFees: false,
     authorCredit: false,
   });
+
   const handleChange = (name, value) => {
     if (name === "all") {
       setForm((prevForm) => ({
@@ -32,7 +33,6 @@ const Modal = ({ onClose, type, leadData }) => {
         dativesFees: value,
         authorCredit: value,
       }));
-      console.log(form);
     } else {
       const updatedForm = {
         ...form,
@@ -46,7 +46,6 @@ const Modal = ({ onClose, type, leadData }) => {
 
       updatedForm.all = allSelected;
       setForm(updatedForm);
-      console.log(form);
     }
   };
   const handleSubmit = async (event) => {
@@ -63,14 +62,13 @@ const Modal = ({ onClose, type, leadData }) => {
         authorCredit: form.authorCredit,
       });
       if (response === true) {
-        alert("Lead Cadastrado!");
         onClose();
-        window.location.reload();
+        onLeadCreated(true);
       } else {
-        alert("Erro ao enviar formulário!");
+        onLeadCreated(false)
       }
     } catch (error) {
-      alert("Erro ao enviar formulário!", error);
+       alert("Erro ao enviar formulário!", error);
       console.log(error);
     }
   };

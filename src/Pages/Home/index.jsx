@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import { Container } from "./style";
 import logo from "../../assets/logo.svg";
 import { logoutUser } from "../../Services/UserService";
 import Modal from "../../Components/Modal";
 import Button from "../../Components/Button";
 import Table from "../../Components/Table";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +17,20 @@ const Home = () => {
     logoutUser();
     window.location.reload();
   };
-
+  const handleLeadCreated = (isCreated) => {
+    if (isCreated === true) {
+      toast.success("Lead cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } else {
+      toast.error("Não foi possível criar o lead", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
   return (
     <Container>
       <img src={logo} alt="Logo" height={70} />
@@ -25,8 +41,13 @@ const Home = () => {
         text="+ Novo Lead"
       />
       <div>{/* Adicione o botão de logout aqui */}</div>
-      {showModal && <Modal onClose={toggleModal} type="new" />}
-
+      {showModal && (
+        <Modal
+          onClose={toggleModal}
+          onLeadCreated={handleLeadCreated}
+          type="new"
+        />
+      )}
       <Table />
     </Container>
   );
